@@ -6,15 +6,25 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout tests
         uses: actions/checkout@v4
+
+      - name: Checkout RWA app
+        uses: actions/checkout@v4
+        with:
+          repository: cypress-io/cypress-realworld-app
+          path: rwa-app
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
-      - name: Install dependencies
+      - name: Install RWA dependencies
+        run: npm install
+        working-directory: rwa-app
+
+      - name: Install test dependencies
         run: npm install
 
       - name: Setup JSON fixtures
@@ -23,9 +33,12 @@ jobs:
           cp cypress/fixtures/bankAccount.json.example cypress/fixtures/bankAccount.json
           cp cypress/fixtures/accountUsers.json.example cypress/fixtures/accountUsers.json
 
+      - name: Start RWA app
+        run: npm start &
+        working-directory: rwa-app
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          start: npm start
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 120
