@@ -1,7 +1,7 @@
 {
   "validUser": {
-    "username": "enter_username",
-    "password": "enter_password"
+    "username": "Heath93",
+    "password": "s3cret"
   },
   "invalidUsernameUser": {
     "username": "enter_invalid_username",
