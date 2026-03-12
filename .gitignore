@@ -1,0 +1,6 @@
+node_modules/
+cypress/videos/
+cypress/screenshots/
+cypress/fixtures/users.json
+cypress/fixtures/bankAccount.json
+cypress/fixtures/accountUsers.json

@@ -1,0 +1,7 @@
+{
+  "validBankAccount": {
+    "bankName": "Enter Bank name",
+    "routingNumber": "Enter_routing_number",
+    "accountNumber": "Enter_account_number"
+  }
+}

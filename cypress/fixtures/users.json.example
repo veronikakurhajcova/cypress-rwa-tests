@@ -1,0 +1,19 @@
+{
+  "validUser": {
+    "username": "enter_username",
+    "password": "enter_password"
+  },
+  "invalidUsernameUser": {
+    "username": "enter_invalid_username",
+    "password": "enter_password"
+  },
+  "invalidPasswordUser": {
+    "username": "enter_username",
+    "password": "enter_invalid_password"
+  },
+  "invalidTooShortPasswordUser": {
+    "username": "enter_username",
+    "password": "enter_short_password",
+    "helperText": "Write helper text"
+  }
+}

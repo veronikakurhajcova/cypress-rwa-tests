@@ -1,0 +1,8 @@
+{
+  "validUser": {
+    "username": "enter_username",
+    "amount": 300,
+    "invalidAmount": -100,
+    "description": "Writer description payment"
+  }
+}
