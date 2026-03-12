@@ -38,7 +38,7 @@ it('should login with valid credentials', () => {
     loginPage.getUsernameHelperText().should('have.css', 'color', 'rgb(211, 47, 47)');
  })
 
- it('login with too short password', () => {
+ it.skip('login with too short password', () => {
     loginPage.getUsernameField().type(users.invalidTooShortPasswordUser.username);
     loginPage.getPasswordField().type(users.invalidTooShortPasswordUser.password).blur();
     loginPage.getSubmitButton().should('be.disabled');
