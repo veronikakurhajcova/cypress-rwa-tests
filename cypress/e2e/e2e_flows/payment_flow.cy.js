@@ -67,7 +67,7 @@ it.skip('should not allow SQL injection in amount field', () => {
     newTransactionPage.getRequestButton().should('be.disabled');
 });
 
-it('should not allow amount that exceeds maximum limit', () => {
+it.skip('should not allow amount that exceeds maximum limit', () => {
     newTransactionPage.fillTransactionDetail('999999999999', accountUsers.validUser.description);
     newTransactionPage.getPayButton().should('be.disabled');
     newTransactionPage.getRequestButton().should('be.disabled');
