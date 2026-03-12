@@ -17,8 +17,19 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Check files
-        run: ls -la
-        
-      - name: Cypress Version
-        run: npx cypress --version
+      - name: Setup JSON fixtures
+        run: |
+          cp cypress/fixtures/users.json.example cypress/fixtures/users.json
+          cp cypress/fixtures/bankAccount.json.example cypress/fixtures/bankAccount.json
+          cp cypress/fixtures/accountUsers.json.example cypress/fixtures/accountUsers.json
+
+      - name: Build and Start App
+        run: |
+          npm run dev &
+          npx wait-on http://localhost:3000
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm start
+          wait-on: 'http://localhost:3000'
