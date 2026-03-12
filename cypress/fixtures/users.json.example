@@ -4,16 +4,16 @@
     "password": "s3cret"
   },
   "invalidUsernameUser": {
-    "username": "enter_invalid_username",
-    "password": "enter_password"
+    "username": "Heath890",
+    "password": "s3cret"
   },
   "invalidPasswordUser": {
-    "username": "enter_username",
-    "password": "enter_invalid_password"
+    "username": "Heath93",
+    "password": "wrongpass"
   },
   "invalidTooShortPasswordUser": {
-    "username": "enter_username",
-    "password": "enter_short_password",
-    "helperText": "Write helper text"
+    "username": "Heath93",
+    "password": "pass",
+    "helperText": "Password must contain at least 5 characters"
   }
 }

@@ -1,6 +1,6 @@
 {
   "validUser": {
-    "username": "enter_username",
+    "username": "Lia",
     "amount": 300,
     "invalidAmount": -100,
     "description": "Writer description payment"
