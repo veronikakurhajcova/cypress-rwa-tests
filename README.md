@@ -1,3 +1,4 @@
+![Cypress Tests](https://github.com/veronikakurhajcova/cypress-rwa-tests/actions/workflows/cypress.yml/badge.svg)
 # Cypress Real World App - E2E Testing Project
 
 This repository contains a robust end-to-end (E2E) testing solution for the "Cypress Real World App". The project demonstrates modern automated testing practices with a focus on maintainability, security, and clean code architecture.
