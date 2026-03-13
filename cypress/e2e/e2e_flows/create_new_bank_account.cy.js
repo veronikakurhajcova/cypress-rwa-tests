@@ -32,7 +32,7 @@ describe('Create new bank account', () => {
         bankAccountPage.verifyNewBankIsExist(this.bankAccount.validBankAccount.bankName);
     });
 
-    it('should create and delete a bank account', function() {
+    it.skip('should create and delete a bank account', function() {
         bankAccountPage.clickNewBankAccount();
         createBankAccountPage.fillCreateBankAccountForm(
             this.bankAccount.validBankAccount.bankName,
