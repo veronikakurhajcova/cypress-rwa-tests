@@ -21,7 +21,11 @@ jobs:
           node-version: 20
 
       - name: Install RWA dependencies
-        run: npm install --legacy-peer-deps
+        run: yarn install
+        working-directory: rwa-app
+
+      - name: Seed RWA database
+        run: yarn db:seed:dev
         working-directory: rwa-app
 
       - name: Install test dependencies
@@ -34,11 +38,11 @@ jobs:
           cp cypress/fixtures/accountUsers.json.example cypress/fixtures/accountUsers.json
 
       - name: Start RWA app
-        run: npm start &
+        run: yarn dev &
         working-directory: rwa-app
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          wait-on: 'http://localhost:3000'
+          wait-on: 'http://localhost:3000, http://localhost:3001'
           wait-on-timeout: 120
