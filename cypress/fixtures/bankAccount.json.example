@@ -1,6 +1,6 @@
 {
   "validBankAccount": {
-    "bankName": "Test bank",
+    "bankName": "Test Bank",
     "routingNumber": "123456789",
     "accountNumber": "987654321"
   }
