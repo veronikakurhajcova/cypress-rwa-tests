@@ -26,7 +26,7 @@ class BankAccountPage {
   }
 
     verifyBankAccountIsDeleted(bankName) {
-        cy.contains('p', `${bankName} (Deleted)`).should('be.visible',{ timeout: 10000 });
+        cy.contains('li', `${bankName} (Deleted)`).should('be.visible',{ timeout: 10000 });
     }
 
 }
