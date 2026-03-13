@@ -9,47 +9,40 @@ describe('Create new bank account', () => {
     const homePage = new HomePage();
     const bankAccountPage = new BankAccountPage();
     const createBankAccountPage = new CreateBankAccountPage();
-    let users;
-    let bankAccount;
-
-    before(() => {
-        cy.fixture('users').then((data) => {
-            users = data;
-        });
-        cy.fixture('bankAccount').then((data) => {
-            bankAccount = data;
-        });
-    });
 
     beforeEach(() => {
-        cy.visit('/signin');
-        loginPage.login(users.validUser.username, users.validUser.password);
-        cy.url().should('not.include', '/signin');
+    cy.fixture('users').as('users');
+    cy.fixture('bankAccount').as('bankAccount')
+    });
+
+    beforeEach(function() {
+        cy.loginBySession(this.users.validUser.username, this.users.validUser.password);
+        cy.visit('/');
         homePage.clickSideNavBankAccounts();
     });
 
-    it('should create a new bank account', () => {
+    it('should create a new bank account', function() {
         bankAccountPage.clickNewBankAccount();
         createBankAccountPage.fillCreateBankAccountForm(
-            bankAccount.validBankAccount.bankName,
-            bankAccount.validBankAccount.routingNumber,
-            bankAccount.validBankAccount.accountNumber
+            this.bankAccount.validBankAccount.bankName,
+            this.bankAccount.validBankAccount.routingNumber,
+            this.bankAccount.validBankAccount.accountNumber
         );
         createBankAccountPage.saveCreatedBankAccount();
-        bankAccountPage.verifyNewBankIsExist(bankAccount.validBankAccount.bankName);
+        bankAccountPage.verifyNewBankIsExist(this.bankAccount.validBankAccount.bankName);
     });
 
-    it('should create and delete a bank account', () => {
+    it('should create and delete a bank account', function() {
         bankAccountPage.clickNewBankAccount();
         createBankAccountPage.fillCreateBankAccountForm(
-            bankAccount.validBankAccount.bankName,
-            bankAccount.validBankAccount.routingNumber,
-            bankAccount.validBankAccount.accountNumber
+            this.bankAccount.validBankAccount.bankName,
+            this.bankAccount.validBankAccount.routingNumber,
+            this.bankAccount.validBankAccount.accountNumber
         );
         createBankAccountPage.saveCreatedBankAccount();
-        bankAccountPage.verifyNewBankIsExist(bankAccount.validBankAccount.bankName);
+        bankAccountPage.verifyNewBankIsExist(this.bankAccount.validBankAccount.bankName);
         bankAccountPage.clickDeleteBankAccount();
-        bankAccountPage.verifyBankAccountIsDeleted(bankAccount.validBankAccount.bankName);
+        bankAccountPage.verifyBankAccountIsDeleted(this.bankAccount.validBankAccount.bankName);
     });
 
 });

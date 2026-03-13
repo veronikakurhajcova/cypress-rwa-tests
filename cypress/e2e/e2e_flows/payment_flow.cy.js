@@ -7,45 +7,41 @@ describe('New transaction', () => {
 const loginPage = new LoginPage();
 const homePage = new HomePage();
 const newTransactionPage = new NewTransactionPage();
-let users;
-let accountUsers;
-
-before(() => {
-   cy.fixture('users').then((data) => {
-   users = data;
-    });
-   cy.fixture('accountUsers').then((data) => {
-   accountUsers = data;
-})
-})
 
 beforeEach(() => {
-    cy.visit('/signin');
-    loginPage.login(users.validUser.username,users.validUser.password);
-    cy.url().should('not.include','/signin');
+   cy.fixture('users').as('users');
+   cy.fixture('accountUsers').as('accountUsers');
+})
+
+beforeEach(function() {
+     cy.loginBySession(this.users.validUser.username, this.users.validUser.password);
+     cy.visit('/');
      homePage.clickNewTransaction();
-            newTransactionPage.searchUser(accountUsers.validUser.username);
-            newTransactionPage.verifySelectedUser(accountUsers.validUser.username);
+            newTransactionPage.searchUser(this.accountUsers.validUser.username);
+            newTransactionPage.verifySelectedUser(this.accountUsers.validUser.username);
 })
 
-it('should create a new payment', () => {
-        newTransactionPage.fillTransactionDetail(accountUsers.validUser.amount, accountUsers.validUser.description);
+it('should create a new payment', function() {
+        newTransactionPage.fillTransactionDetail(this.accountUsers.validUser.amount,
+                                                 this.accountUsers.validUser.description);
         newTransactionPage.clickPayment();
-        newTransactionPage.verifyUserAmountWithDescription(accountUsers.validUser.username,
-                                                           accountUsers.validUser.amount,
-                                                           accountUsers.validUser.description)
+        newTransactionPage.verifyUserAmountWithDescription(this.accountUsers.validUser.username,
+                                                           this.accountUsers.validUser.amount,
+                                                           this.accountUsers.validUser.description)
 })
 
-it('should request payment', () => {
-        newTransactionPage.fillTransactionDetail(accountUsers.validUser.amount, accountUsers.validUser.description);
+it('should request payment', function() {
+        newTransactionPage.fillTransactionDetail(this.accountUsers.validUser.amount,
+                                                 this.accountUsers.validUser.description);
         newTransactionPage.clickRequest();
-        newTransactionPage.verifyUserAmountWithDescription(accountUsers.validUser.username,
-                                                                   accountUsers.validUser.amount,
-                                                                   accountUsers.validUser.description)
+        newTransactionPage.verifyUserAmountWithDescription(this.accountUsers.validUser.username,
+                                                           this.accountUsers.validUser.amount,
+                                                           this.accountUsers.validUser.description)
 })
 
-it.skip('should not allow negative amount - KNOWN BUG', () => {
-        newTransactionPage.fillTransactionDetail(accountUsers.validUser.invalidAmount, accountUsers.validUser.description);
+it.skip('should not allow negative amount - KNOWN BUG', function() {
+        newTransactionPage.fillTransactionDetail(this.accountUsers.validUser.invalidAmount,
+                                                 this.accountUsers.validUser.description);
         newTransactionPage.getPayButton().should('be.disabled');
         newTransactionPage.getRequestButton().should('be.disabled');
 })
@@ -55,20 +51,20 @@ it('should not allow empty amount and description', () => {
     newTransactionPage.getRequestButton().should('be.disabled');
 });
 
-it('should not allow text in amount field', () => {
-    newTransactionPage.fillTransactionDetail('abc', accountUsers.validUser.description);
+it('should not allow text in amount field', function() {
+    newTransactionPage.fillTransactionDetail('abc', this.accountUsers.validUser.description);
     newTransactionPage.getPayButton().should('be.disabled');
     newTransactionPage.getRequestButton().should('be.disabled');
 });
 
-it.skip('should not allow SQL injection in amount field', () => {
-    newTransactionPage.fillTransactionDetail("' OR '1'='1", accountUsers.validUser.description);
+it.skip('should not allow SQL injection in amount field', function() {
+    newTransactionPage.fillTransactionDetail("' OR '1'='1", this.accountUsers.validUser.description);
     newTransactionPage.getPayButton().should('be.disabled');
     newTransactionPage.getRequestButton().should('be.disabled');
 });
 
-it.skip('should not allow amount that exceeds maximum limit', () => {
-    newTransactionPage.fillTransactionDetail('999999999999', accountUsers.validUser.description);
+it.skip('should not allow amount that exceeds maximum limit', function() {
+    newTransactionPage.fillTransactionDetail('999999999999', this.accountUsers.validUser.description);
     newTransactionPage.getPayButton().should('be.disabled');
     newTransactionPage.getRequestButton().should('be.disabled');
 });

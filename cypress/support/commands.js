@@ -23,3 +23,13 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('loginBySession', (username, password) => {
+    cy.session([username,password], () => {
+        cy.visit('/');
+          cy.get('#username').type(username);
+          cy.get('#password').type(password);
+          cy.get('[data-test="signin-submit"]').click();
+         cy.url().should('not.include', '/signin');
+    })
+})
