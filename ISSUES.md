@@ -27,7 +27,18 @@
 
 **Suggested improvement:** Add numeric-only validation on amount field
 
-### 3. No maximum amount limit on transaction
+### 3. Incorrect UI state displayed on 500 server error
+
+**Page:** Bank Accounts  
+**Steps to reproduce:**
+1. Intercept `ListBankAccount` GraphQL request and return 500 status
+2. Navigate to `/bankaccounts`
+
+**Expected:** Error message informing user that something went wrong  
+**Actual:** "No Bank Accounts" message is displayed — same as empty state  
+**Severity:** Medium — misleading UX, user cannot distinguish between server error and empty list
+
+### 4. No maximum amount limit on transaction
 **Steps to reproduce:**
 1. Login
 2. Click New Transaction
@@ -55,3 +66,4 @@
 **Observation:** Amount field has `type="text"` with `inputmode="numeric"` 
 **Question:** Should this be changed to `type="number"` for better validation?
 **Status:** Needs clarification from developer
+
