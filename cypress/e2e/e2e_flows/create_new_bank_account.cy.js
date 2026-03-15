@@ -1,11 +1,9 @@
-import LoginPage from '../../pages/LoginPage';
 import HomePage from '../../pages/HomePage';
 import BankAccountPage from '../../pages/BankAccountPage';
 import CreateBankAccountPage from '../../pages/CreateBankAccountPage';
 
 describe('Create new bank account', () => {
 
-    const loginPage = new LoginPage();
     const homePage = new HomePage();
     const bankAccountPage = new BankAccountPage();
     const createBankAccountPage = new CreateBankAccountPage();

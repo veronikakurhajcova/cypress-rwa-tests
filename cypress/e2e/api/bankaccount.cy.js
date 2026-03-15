@@ -1,17 +1,15 @@
 describe('Bank Account API', () => {
 
-  beforeEach(() => {
-    cy.fixture('users').as('users');
-  });
-
   beforeEach(function() {
-    cy.loginBySession(this.users.validUser.username, this.users.validUser.password);
-  });
+        cy.fixture('users').then((users) => {
+          cy.loginBySession(users.validUser.username, users.validUser.password)
+        })
+    });
 
   it('should get list of bank accounts', function() {
     cy.request({
       method: 'POST',
-      url: 'http://localhost:3001/graphql',
+      url: `${Cypress.env('apiUrl')}/graphql`,
       body: {
         operationName: 'ListBankAccount',
         query: `query ListBankAccount {
@@ -32,7 +30,7 @@ describe('Bank Account API', () => {
   it('should create a new bank account', function() {
     cy.request({
       method: 'POST',
-      url: 'http://localhost:3001/graphql',
+      url: `${Cypress.env('apiUrl')}/graphql`,
       body: {
         operationName: 'CreateBankAccount',
         query: `mutation CreateBankAccount($bankName: String!, $routingNumber: String!, $accountNumber: String!) {

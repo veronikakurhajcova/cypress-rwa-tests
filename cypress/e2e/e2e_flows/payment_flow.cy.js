@@ -1,10 +1,8 @@
-import LoginPage from '../../pages/LoginPage';
 import HomePage from '../../pages/HomePage';
 import NewTransactionPage from '../../pages/NewTransactionPage';
 
 describe('New transaction', () => {
 
-const loginPage = new LoginPage();
 const homePage = new HomePage();
 const newTransactionPage = new NewTransactionPage();
 

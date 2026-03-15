@@ -1,16 +1,12 @@
-import LoginPage from '../../pages/LoginPage';
-import HomePage from '../../pages/HomePage';
-
 describe('Bank Account API - intercept', () => {
 
-  beforeEach(() => {
-    cy.fixture('users').as('users');
+    beforeEach(function() {
+      cy.fixture('users').then((users) => {
+        cy.loginBySession(users.validUser.username, users.validUser.password)
+        cy.visit('/bankaccounts');
+      })
   });
 
-  beforeEach(function() {
-    cy.loginBySession(this.users.validUser.username, this.users.validUser.password);
-    cy.visit('/bankaccounts');
-  });
 
   it('should display empty state instead of error message on 500 - KNOWN BUG', function() {
     cy.intercept('POST', '/graphql', (req) => {
